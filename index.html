@@ -10,24 +10,42 @@
         - Economic/Social/Infrastructure Stats (Report Table 1, Section II): Goal: Inform on current state. Viz: Key stat cards and bar/donut charts (Chart.js). Interaction: Hover on charts. Justification: Quick overview & visual comparison.
         - MSW Composition (Section II.C): Goal: Show waste components. Viz: Donut chart (Chart.js). Interaction: Hover. Justification: Standard for proportions.
         - Criteria Map (Section III): Goal: Explain selection framework. Viz: Interactive list of principles. Interaction: Click to expand details. Justification: Structured learning. Method: HTML/Tailwind/JS.
-        - Industrial Opportunities (Section IV, Table 3): Goal: Explore potential ventures. Viz: Filterable cards. Interaction: Filter by sector, click to expand details in modal. Justification: User-driven exploration. Method: HTML/Tailwind/JS.
+        - Industrial Opportunities (Section IV, Table 3): Goal: Explore potential ventures. Viz: Filterable cards, including new 'Future Horizons' cards. Interaction: Filter by sector, click to expand details in modal. Justification: User-driven exploration. Method: HTML/Tailwind/JS.
         - Unfair Advantages (Section V, Table 6): Goal: Highlight strengths. Viz: Expandable cards. Interaction: Click to reveal details. Justification: Focused information delivery. Method: HTML/Tailwind/JS.
-        - EIP Models (Section VI, Table 7): Goal: Showcase global examples. Viz: Accordion/cards. Interaction: Click to expand. Justification: Comparative learning. Method: HTML/Tailwind/JS. General C2C diagram removed.
-        - Strategic Recommendations (Section VII): Goal: Outline future steps. Viz: Accordion for categories. Interaction: Click to expand. Justification: Organized presentation of actions. Method: HTML/Tailwind/JS.
-        - Pistachio Milk Deep Dive (Report Sec IV.A.2, Table 4 & general knowledge): Goal: In-depth exploration. Viz: Text, key stat callouts, HTML/CSS process flow with icons, CAPEX/OPEX list, BOM components list with illustrative international cost ranges, COMPARISON TABLE of non-dairy milks (general), NUTRITIONAL COMPARISON TABLE (detailed), MARKETING SECTION, enhanced POWER/SUSTAINABILITY SECTION with improved visuals, NEW detailed C2C diagram for pistachio milk factory. Interaction: Informative. Justification: Detailed focus. Method: HTML/Tailwind.
-        - Olive Oil Deep Dive (NEW TAB, based on Report Sec IV.A.1, Table 4 & general knowledge): Goal: In-depth exploration of olive oil. Viz: Text, key stat callouts, HTML/CSS process flow with icons, CAPEX/OPEX list, BOM components list with illustrative international cost ranges, enhanced POWER/SUSTAINABILITY SECTION with improved visuals. Interaction: Informative. Justification: Detailed focus on a high-potential product. Method: HTML/Tailwind.
+        - EIP Models (Section VI, Table 7): Goal: Showcase global examples. Viz: Accordion/cards. Interaction: Click to expand. Justification: Comparative learning. Method: HTML/Tailwind/JS.
+        - Strategic Recommendations (Section VII): Goal: Outline future steps. Viz: Accordion for categories. Interaction: Click to expand. Justification: Organized presentation of actions. Method: HTML/Tailwind/JS. Updated with AI/Robotics skills points.
+        - Pistachio Milk Deep Dive (Report Sec IV.A.2, Table 4 & general knowledge): Goal: In-depth exploration. Viz: Text, key stat callouts, HTML/CSS process flow with icons, CAPEX/OPEX list, BOM components list with illustrative international cost ranges, COMPARISON TABLE of non-dairy milks (general), NUTRITIONAL COMPARISON TABLE (detailed), MARKETING SECTION, enhanced POWER/SUSTAINABILITY SECTION with improved visuals (HTML/CSS diagrams), detailed C2C diagram for pistachio milk factory (HTML/CSS diagram). Interaction: Informative. Justification: Detailed focus. Method: HTML/Tailwind.
+        - Olive Oil Deep Dive ( based on Report Sec IV.A.1, Table 4 & general knowledge): Goal: In-depth exploration of olive oil. Viz: Text, key stat callouts, HTML/CSS process flow with icons, CAPEX/OPEX list, BOM components list with illustrative international cost ranges, enhanced POWER/SUSTAINABILITY SECTION with improved visuals (HTML/CSS diagrams). Interaction: Informative. Justification: Detailed focus on a high-potential product. Method: HTML/Tailwind.
         - All textual content is summarized with clear headings and introductory paragraphs for each section to provide context and guide the user.
     -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body { font-family: 'Inter', sans-serif; }
         .tab-active { background-color: #059669; color: white; }
         .tab-inactive { background-color: #D1FAE5; color: #065F46; }
         .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
         @media (min-width: 768px) { .chart-container { height: 350px; } }
-        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
-        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 700px; border-radius: 0.5rem; position: relative; }
+        
+        /* General Modal Styles */
+        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(3px); }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 0.5rem; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; top: 10px; right: 20px;}
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+
+        /* Password Modal Specific Styles */
+        #passwordModal .modal-content { max-width: 400px; }
+        #passwordModal input[type="password"] { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #D1D5DB; border-radius: 0.375rem; box-sizing: border-box; }
+        #passwordModal button { padding: 0.75rem 1.5rem; border-radius: 0.375rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+        #passwordModal #submitPassword { background-color: #059669; color: white; }
+        #passwordModal #submitPassword:hover { background-color: #047857; }
+        #passwordModal #cancelPassword { background-color: #E5E7EB; color: #374151; margin-left: 0.5rem; }
+        #passwordModal #cancelPassword:hover { background-color: #D1D5DB; }
+        #passwordError { color: #EF4444; font-size: 0.875rem; margin-top: -0.5rem; margin-bottom: 1rem; display: none; }
+
+
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .future-card { border-left: 4px solid #2563eb; } /* Blue accent for future cards */
+        .future-card-badge { background-color: #2563eb; color: white; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 0.25rem; position: absolute; top: 10px; right: 10px; }
         .section-intro { font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem; color: #374151; }
         h2 { color: #065f46; } h3 { color: #047857; } h4 { color: #065f46; }
         .stat-card { background-color: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); text-align: center; }
@@ -52,19 +70,27 @@
         .comparison-table .sub-text { font-size: 0.75rem; color: #6B7280; }
         .marketing-point { margin-bottom: 0.75rem; }
         .marketing-point strong { color: #047857; }
-        .sustainability-illustration { display: flex; align-items: center; background-color: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.75rem; border-radius: 0.375rem; margin-bottom: 0.5rem; }
-        .sustainability-illustration-icon { font-size: 1.75rem; color: #10b981; margin-right: 0.75rem; }
-        .power-illustration { display: flex; flex-direction: column; align-items: center; background-color: #fffbeb; border: 1px solid #fde68a; padding: 1rem; border-radius: 0.5rem; margin-top:0.5rem; }
-        .power-illustration-row { display: flex; align-items: center; margin-bottom: 0.5rem; }
-        .power-illustration-icon { font-size: 2rem; color: #f59e0b; margin: 0 0.5rem; }
+        .sustainability-illustration { display: flex; flex-col: sm:flex-row; align-items: center; background-color: #f0fdf4; border-left: 4px solid #10b981; padding: 1rem; border-radius: 0.375rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .sustainability-illustration-icon { font-size: 2rem; color: #10b981; margin-right: 0.0rem; sm:margin-right: 1rem; margin-bottom: 0.5rem; sm:margin-bottom: 0; }
+        .sustainability-illustration div { text-align: center; sm:text-left; }
+        .power-illustration { display: flex; flex-direction: column; align-items: center; background-color: #fffbeb; border: 1px solid #fde68a; padding: 1rem; border-radius: 0.5rem; margin-top:0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .power-illustration-row { display: flex; flex-wrap: wrap; justify-content:center; align-items: center; margin-bottom: 0.5rem; }
+        .power-illustration-item { display: flex; flex-direction: column; align-items: center; text-align:center; margin: 0.5rem; background-color: #fef3c7; padding: 0.5rem; border-radius: 0.375rem; min-width: 100px; }
+        .power-illustration-icon { font-size: 2.5rem; color: #f59e0b; margin-bottom:0.25rem; }
+        .power-connector { font-size: 1.5rem; color: #fbbf24; margin: 0.5rem; }
         .c2c-diagram-container { background-color: #f8fafc; border: 2px dashed #9ca3af; border-radius: 0.75rem; padding: 1.5rem; margin-top: 1rem; }
-        .c2c-stage { background-color: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin: 0.5rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex: 1; min-width: 150px; }
+        .c2c-stage { background-color: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin: 0.5rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex: 1; min-width: 160px; display: flex; flex-direction: column; justify-content: space-between;}
         .c2c-stage-icon { font-size: 2.5rem; color: #059669; margin-bottom: 0.5rem; }
         .c2c-stage-title { font-weight: 600; color: #065f46; margin-bottom: 0.25rem; font-size: 0.9rem; }
         .c2c-stage-text { font-size: 0.8rem; color: #4b5563; }
-        .c2c-arrow-lg { font-size: 2.5rem; color: #6b7280; margin: auto 1rem; }
+        .c2c-arrow-lg { font-size: 2.5rem; color: #6b7280; margin: auto 1rem; display: flex; align-items: center; justify-content:center; }
         .c2c-row-flex { display: flex; flex-wrap: wrap; justify-content: space-around; align-items: stretch; width: 100%; margin-bottom:1rem; }
         .c2c-input-output { border: 1px solid #cbd5e1; padding: 0.5rem; border-radius: 0.375rem; margin-top: 0.5rem; font-size:0.75rem; background-color: #f1f5f9;}
+        .future-item { background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem; margin-bottom: 0.75rem; border-radius: 0.25rem; }
+        .future-item-title { font-weight: 600; color: #1d4ed8; display: flex; align-items: center; margin-bottom: 0.25rem;}
+        .future-item-icon { font-size: 1.5rem; margin-right: 0.5rem;}
+        .tech-highlight { background-color: #e0e7ff; border: 1px solid #a5b4fc; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size:0.75rem; color: #4338ca; margin-top:0.25rem; display:inline-block; }
+        .modal-section-title { font-size: 1.1rem; font-weight: 600; color: #047857; margin-top: 1rem; margin-bottom: 0.5rem; border-bottom: 1px solid #d1fae5; padding-bottom: 0.25rem;}
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -88,6 +114,21 @@
             <button data-tab="strategy" class="tab-button tab-inactive px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition-colors duration-150">Strategy</button>
         </div>
     </nav>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold mb-4 text-emerald-700">Access Restricted</h3>
+            <p class="text-sm text-stone-600 mb-3">Please enter the password to view this section:</p>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <p id="passwordError">Incorrect password. Please try again.</p>
+            <div class="flex justify-end mt-4">
+                <button id="cancelPassword">Cancel</button>
+                <button id="submitPassword">Submit</button>
+            </div>
+        </div>
+    </div>
+
 
     <main class="container mx-auto p-4 sm:p-6">
         <div id="reality" class="tab-content">
@@ -172,12 +213,13 @@
         <div id="industries" class="tab-content hidden">
             <section class="mb-8 p-6 bg-white rounded-lg shadow">
                 <h2 class="text-2xl font-semibold mb-4">Exploring Pioneering Industrial Opportunities</h2>
-                <p class="section-intro">Discover potential eco-friendly industries tailored for Syria's unique context. This section details specific ventures across Agri-Food, Sustainable Materials, and Renewable Energy sectors. Each opportunity is assessed for its environmental benefits, market potential, and how it leverages Syrian resources. Use the filters to explore sectors of interest and click on any opportunity to view more details.</p>
-                <div class="mb-6 flex space-x-2">
-                    <button data-filter="all" class="industry-filter-button bg-emerald-500 text-white px-4 py-2 rounded-md text-sm font-medium">All Sectors</button>
-                    <button data-filter="agri-food" class="industry-filter-button bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">Agri-Food</button>
-                    <button data-filter="materials" class="industry-filter-button bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">Sustainable Materials</button>
-                    <button data-filter="energy" class="industry-filter-button bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">Renewable Energy</button>
+                <p class="section-intro">Discover potential eco-friendly industries tailored for Syria's unique context. This section details specific ventures across Agri-Food, Sustainable Materials, Renewable Energy, and Future Horizons. Each opportunity is assessed for its environmental benefits, market potential, and how it leverages Syrian resources. Use the filters to explore sectors of interest and click on any opportunity to view more details.</p>
+                <div class="mb-6 flex flex-wrap space-x-2">
+                    <button data-filter="all" class="industry-filter-button bg-emerald-500 text-white px-3 py-2 rounded-md text-sm font-medium mb-2">All Sectors</button>
+                    <button data-filter="agri-food" class="industry-filter-button bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm font-medium mb-2">Agri-Food</button>
+                    <button data-filter="materials" class="industry-filter-button bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm font-medium mb-2">Sustainable Materials</button>
+                    <button data-filter="energy" class="industry-filter-button bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm font-medium mb-2">Renewable Energy</button>
+                    <button data-filter="future" class="industry-filter-button bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm font-medium mb-2">Future Horizons</button>
                 </div>
                 <div id="opportunitiesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 </div>
@@ -193,30 +235,39 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="bg-green-50 p-4 rounded-lg border border-green-200">
                         <h4 class="font-semibold text-green-700 mb-2">Production & Cultivars:</h4>
-                        <ul class="list-disc list-inside text-sm text-green-800 space-y-1">
-                            <li><span class="sustainability-point-icon">📈</span>Projected output: 105,000 MT for 2024/2025 season.</li>
-                            <li><span class="sustainability-point-icon">🌍</span>Accounts for ~3% of global olive oil production.</li>
-                            <li><span class="sustainability-point-icon">🌳</span>Unique local cultivars: 'Sorani' (high oil), 'Zaity', 'Doebli', 'Qaisi' (dual-purpose), 'Abbadi Abu-Ghabra' (table olive).</li>
-                            <li><span class="sustainability-point-icon">⚠️</span>Challenges: Quality consistency, oxidation, meeting IOC standards.</li>
+                        <ul class="list-disc list-inside text-sm text-green-800 space-y-2">
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">📈</span><span>Projected output: 105,000 MT for 2024/2025 season.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🌍</span><span>Accounts for ~3% of global olive oil production.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🌳</span><span>Unique local cultivars: 'Sorani' (high oil), 'Zaity', 'Doebli', 'Qaisi' (dual-purpose), 'Abbadi Abu-Ghabra' (table olive).</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">⚠️</span><span>Challenges: Quality consistency, oxidation, meeting IOC standards.</span></li>
                         </ul>
                     </div>
                     <div class="bg-amber-50 p-4 rounded-lg border border-amber-200">
                         <h4 class="font-semibold text-amber-700 mb-2">Market Potential & Trends:</h4>
-                        <ul class="list-disc list-inside text-sm text-amber-800 space-y-1">
-                            <li><span class="sustainability-point-icon">🌟</span>Strong global demand for premium/organic Extra Virgin Olive Oil (EVOO).</li>
-                            <li><span class="sustainability-point-icon">✈️</span>Key export markets: EU, North America, Gulf countries.</li>
-                            <li><span class="sustainability-point-icon">🌿</span>Growing market for natural bioactive compounds from olive pomace.</li>
-                            <li><span class="sustainability-point-icon">🔍</span>Consumer interest in traceability, origin-specific products, and sustainable practices.</li>
+                        <ul class="list-disc list-inside text-sm text-amber-800 space-y-2">
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🌟</span><span>Strong global demand for premium/organic Extra Virgin Olive Oil (EVOO).</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">✈️</span><span>Key export markets: EU, North America, Gulf countries.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🌿</span><span>Growing market for natural bioactive compounds from olive pomace.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🔍</span><span>Consumer interest in traceability, origin-specific products, and sustainable practices.</span></li>
                         </ul>
                     </div>
                 </div>
 
                 <h3 class="text-xl font-semibold mt-6 mb-3">Eco-Friendly Processing & Total Valorization</h3>
-                <p class="text-stone-700 mb-4">A modern Syrian olive oil facility should prioritize sustainability from grove to bottle. This means water-efficient two-phase decanters, renewable energy (solar), organic certification support, and innovative use of by-products.</p>
-                <div class="space-y-3 mb-4">
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">💧</span><span><strong>Water Efficiency:</strong> Implementing two-phase decanters to drastically reduce water usage compared to traditional methods. Focus on OMWW treatment for reuse or safe disposal.</span></div>
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">♻️</span><span><strong>By-Product Valorization:</strong> Transforming olive pomace into bioactives, animal feed, bioenergy (biogas/pellets), and compost, achieving near-zero waste.</span></div>
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">🌱</span><span><strong>Organic & Quality Focus:</strong> Supporting organic farming practices and implementing rigorous quality control from grove to bottle to meet international standards.</span></div>
+                <p class="text-stone-700 mb-4">A modern Syrian olive oil facility will champion sustainability through:</p>
+                <div class="space-y-4 mb-4">
+                    <div class="sustainability-illustration">
+                        <span class="sustainability-illustration-icon">💧</span>
+                        <div><strong class="block text-emerald-700">Advanced Water Efficiency:</strong> Utilizing two-phase decanter technology drastically cuts water use and OMWW (Olive Mill Wastewater) volume. On-site OMWW treatment systems will aim for water recovery for non-critical uses or safe, environmentally sound discharge.</div>
+                    </div>
+                    <div class="sustainability-illustration">
+                        <span class="sustainability-illustration-icon">♻️</span>
+                        <div><strong class="block text-emerald-700">Comprehensive By-Product Valorization:</strong> Achieving a near-zero waste model by transforming olive pomace (solid residue) into multiple valuable streams: extracting bioactives for nutraceuticals, creating high-fiber animal feed, producing bioenergy (biogas/pellets for thermal or electrical needs), and generating nutrient-rich compost for soil enrichment.</div>
+                    </div>
+                     <div class="sustainability-illustration">
+                        <span class="sustainability-illustration-icon">🌱</span>
+                        <div><strong class="block text-emerald-700">Organic & Quality Commitment:</strong> Actively supporting and promoting organic farming among local olive growers. Implementing rigorous, traceable quality assurance from olive grove (best harvesting/transport practices) through to the mill (hygiene, optimal processing parameters) and final bottling (protective packaging, proper storage).</div>
+                    </div>
                 </div>
                 
                 <h4 class="text-lg font-semibold text-emerald-700 mb-2">Improved Production & Valorization Flow:</h4>
@@ -261,27 +312,23 @@
                  <p class="text-xs text-gray-600 mt-1 text-center">This flow aims for zero waste and maximum value from the olive harvest.</p>
 
                 <h4 class="text-lg font-semibold text-emerald-700 mt-6 mb-3">Powering Sustainable Operations: Energy Solutions</h4>
-                <p class="text-stone-700 mb-2">Syria's severe energy crisis, with limited grid availability, poses a significant operational challenge. To ensure consistent production and embody true sustainability, this olive oil facility must prioritize energy independence and efficiency:</p>
+                <p class="text-stone-700 mb-2">Syria's severe energy crisis necessitates a proactive energy strategy for this facility. The illustration below depicts the integrated energy approach:</p>
                 <div class="power-illustration">
                     <div class="power-illustration-row">
-                        <span class="power-illustration-icon">☀️</span>
-                        <p class="text-sm">On-Site Solar PV Generation</p>
-                        <span class="flow-arrow text-sm mx-1">+</span>
-                        <span class="power-illustration-icon">🔋</span>
-                        <p class="text-sm">Battery Storage (BESS)</p>
+                        <div class="power-illustration-item"><span class="power-illustration-icon">☀️</span><span class="text-xs">Solar PV Panels</span></div>
+                        <div class="power-connector">+</div>
+                        <div class="power-illustration-item"><span class="power-illustration-icon">🔋</span><span class="text-xs">Battery Storage (BESS)</span></div>
                     </div>
-                     <div class="flow-arrow text-sm my-1">⬇️</div>
-                    <div class="power-illustration-row bg-emerald-100 p-2 rounded">
-                        <span class="power-illustration-icon">🏭</span>
-                        <p class="text-sm">Factory Operations (Efficient Equipment)</p>
+                     <div class="power-illustration-row"><div class="power-connector">⬇️</div></div>
+                    <div class="power-illustration-row bg-emerald-100 p-2 rounded-md">
+                        <div class="power-illustration-item"><span class="power-illustration-icon">🏭</span><span class="text-xs">Olive Mill Operations (Energy-Efficient Equipment)</span></div>
                     </div>
-                     <div class="flow-arrow text-sm my-1">♻️</div>
+                     <div class="power-illustration-row"><div class="power-connector">♻️</div></div>
                      <div class="power-illustration-row">
-                        <span class="power-illustration-icon">🌿</span>
-                         <p class="text-sm">Bioenergy from Pomace (Thermal/Electricity)</p>
+                         <div class="power-illustration-item"><span class="power-illustration-icon">🌿</span><span class="text-xs">Bioenergy from Pomace (Thermal/Electric)</span></div>
                     </div>
                 </div>
-                <p class="text-stone-700 mt-2">This integrated approach (Solar PV + BESS + Bioenergy from Pomace + Efficient Machinery) addresses the power challenge, significantly lowers the carbon footprint, and enhances operational resilience and marketability.</p>
+                <p class="text-stone-700 mt-2 text-sm">This integrated system aims for energy self-sufficiency by prioritizing on-site solar generation backed by battery storage. Olive pomace, a key by-product, can be used for bioenergy (thermal heat for processes or electricity via gasification). Coupled with energy-efficient machinery, this minimizes reliance on the unstable grid, reduces operational costs, and significantly lowers the carbon footprint.</p>
 
 
                 <h3 class="text-xl font-semibold mt-8 mb-3">Illustrative Cost Considerations (Highly Variable in Syrian Context)</h3>
@@ -396,22 +443,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="bg-green-50 p-4 rounded-lg border border-green-200">
                         <h4 class="font-semibold text-green-700 mb-2">Nutritional Profile & Health Benefits:</h4>
-                        <ul class="list-disc list-inside text-sm text-green-800 space-y-1">
-                            <li><span class="sustainability-point-icon">🥛</span>Naturally lactose-free, dairy-free, soy-free, and often gluten-free.</li>
-                            <li><span class="sustainability-point-icon">🥑</span>Good source of healthy fats (monounsaturated and polyunsaturated).</li>
-                            <li><span class="sustainability-point-icon">✨</span>Contains antioxidants, vitamins (like B6), and minerals (like phosphorus and potassium).</li>
-                            <li><span class="sustainability-point-icon">⚖️</span>Lower in calories compared to some other nut milks if unsweetened.</li>
-                            <li><span class="sustainability-point-icon">❤️</span>May contribute to heart health and blood sugar management.</li>
+                        <ul class="list-disc list-inside text-sm text-green-800 space-y-2">
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🥛</span><span>Naturally lactose-free, dairy-free, soy-free, and often gluten-free.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🥑</span><span>Good source of healthy fats (monounsaturated and polyunsaturated).</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">✨</span><span>Contains antioxidants, vitamins (like B6), and minerals (like phosphorus and potassium).</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">⚖️</span><span>Lower in calories compared to some other nut milks if unsweetened.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">❤️</span><span>May contribute to heart health and blood sugar management.</span></li>
                         </ul>
                     </div>
                     <div class="bg-amber-50 p-4 rounded-lg border border-amber-200">
                         <h4 class="font-semibold text-amber-700 mb-2">Market Trends & Consumer Appeal:</h4>
-                        <ul class="list-disc list-inside text-sm text-amber-800 space-y-1">
-                            <li><span class="sustainability-point-icon">📈</span>Rapidly growing global plant-based milk market (driven by health, ethics, environment).</li>
-                            <li><span class="sustainability-point-icon">🌟</span>Pistachios perceived as a premium, flavorful nut.</li>
-                            <li><span class="sustainability-point-icon">😋</span>Unique taste profile: subtly sweet, nutty, and distinct.</li>
-                            <li><span class="sustainability-point-icon">🎯</span>Appeals to consumers seeking novel and gourmet plant-based options.</li>
-                            <li><span class="sustainability-point-icon">☕</span>Trending ingredient in cafes (lattes, smoothies) and food products.</li>
+                        <ul class="list-disc list-inside text-sm text-amber-800 space-y-2">
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">📈</span><span>Rapidly growing global plant-based milk market (driven by health, ethics, environment).</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🌟</span><span>Pistachios perceived as a premium, flavorful nut.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">😋</span><span>Unique taste profile: subtly sweet, nutty, and distinct.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">🎯</span><span>Appeals to consumers seeking novel and gourmet plant-based options.</span></li>
+                            <li class="flex items-start"><span class="sustainability-illustration-icon pt-1">☕</span><span>Trending ingredient in cafes (lattes, smoothies) and food products.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -419,36 +466,32 @@
                  <p class="text-stone-700 mb-4">Syria's position as the world's sixth-largest pistachio producer (55,000 MT projected for 2024/25) provides a strong foundation. Leveraging this local resource for pistachio milk can create a higher-value product compared to exporting raw nuts, especially for smaller or unsplit nuts not ideal for whole export.</p>
                 
                 <h4 class="text-lg font-semibold text-emerald-700 mb-2">Eco-Friendly Production Aspects:</h4>
-                 <div class="space-y-3 mb-4">
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">💧</span><span><strong>Water Efficiency:</strong> Pistachio trees are relatively drought-tolerant, making them a more water-sustainable nut source in arid regions like Syria.</span></div>
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">🌰</span><span><strong>Whole Nut Utilization:</strong> Modern processing techniques can utilize the entire pistachio kernel, minimizing food waste.</span></div>
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">🚚</span><span><strong>Reduced Carbon Footprint:</strong> Local sourcing and processing of Syrian pistachios drastically reduces transportation emissions.</span></div>
-                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">♻️</span><span><strong>By-Product Valorization:</strong> Pistachio shells are converted into valuable biochar (for soil/carbon sequestration) or active compounds, embodying circular economy principles.</span></div>
+                 <div class="space-y-4 mb-4">
+                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">💧</span><div><strong class="block text-emerald-700">Water Efficiency in Cultivation:</strong> Pistachio trees are inherently drought-tolerant, especially compared to high water-demand nuts like almonds. Promoting water-wise irrigation for pistachios in Syria reinforces this ecological advantage.</div></div>
+                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">🌰</span><div><strong class="block text-emerald-700">Maximizing Nut Utilization:</strong> Employing modern processing (e.g., colloidal mills) that efficiently uses the entire pistachio kernel, including smaller or broken pieces not suitable for direct sale, to minimize food waste in milk production.</div></div>
+                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">🚚</span><div><strong class="block text-emerald-700">Reduced Carbon Footprint via Local Value Chain:</strong> Sourcing pistachios locally within Syria and processing them into milk domestically significantly cuts down on transportation emissions associated with importing raw materials or finished goods.</div></div>
+                    <div class="sustainability-illustration"><span class="sustainability-illustration-icon">♻️</span><div><strong class="block text-emerald-700">Comprehensive By-Product Valorization (Circular Economy):</strong> Implementing systems to convert pistachio shells (a major by-product) into valuable outputs like biochar (enhancing soil fertility and sequestering carbon), activated carbon (for filtration), or for extracting high-value active compounds, thus closing the loop and minimizing landfill waste.</div></div>
                 </div>
 
 
                 <h4 class="text-lg font-semibold text-emerald-700 mt-4 mb-2">Powering Sustainable Operations: Energy Solutions</h4>
-                <p class="text-stone-700 mb-2">The significant energy deficit in Syria presents a major hurdle for any industrial operation. A sustainable pistachio milk factory must address this proactively:</p>
+                <p class="text-stone-700 mb-2">The significant energy deficit in Syria presents a major hurdle for any industrial operation. A sustainable pistachio milk factory must address this proactively. The illustration below outlines the proposed energy strategy:</p>
                  <div class="power-illustration">
                     <div class="power-illustration-row">
-                        <span class="power-illustration-icon">☀️</span>
-                        <p class="text-sm">On-Site Solar PV Generation</p>
-                        <span class="flow-arrow text-sm mx-1">+</span>
-                        <span class="power-illustration-icon">🔋</span>
-                        <p class="text-sm">Battery Storage (BESS)</p>
+                        <div class="power-illustration-item"><span class="power-illustration-icon">☀️</span><span class="text-xs">Solar PV Panels (Rooftop/Ground)</span></div>
+                        <div class="power-connector">+</div>
+                        <div class="power-illustration-item"><span class="power-illustration-icon">🔋</span><span class="text-xs">Battery Energy Storage (BESS)</span></div>
                     </div>
-                     <div class="flow-arrow text-sm my-1">⬇️</div>
-                    <div class="power-illustration-row bg-emerald-100 p-2 rounded">
-                        <span class="power-illustration-icon">🏭</span>
-                        <p class="text-sm">Factory Operations (Efficient Equipment)</p>
+                     <div class="power-illustration-row"><div class="power-connector">⬇️</div></div>
+                    <div class="power-illustration-row bg-emerald-100 p-2 rounded-md">
+                        <div class="power-illustration-item"><span class="power-illustration-icon">🏭</span><span class="text-xs">Pistachio Milk Factory (Energy-Efficient Machinery)</span></div>
                     </div>
-                     <div class="flow-arrow text-sm my-1">♻️</div>
+                     <div class="power-illustration-row"><div class="power-connector">♻️</div></div>
                      <div class="power-illustration-row">
-                        <span class="power-illustration-icon">🌿</span>
-                         <p class="text-sm">Potential Bioenergy from Shell Residues</p>
+                         <div class="power-illustration-item"><span class="power-illustration-icon">🌿</span><span class="text-xs">Bioenergy from Shell Residues (e.g., for thermal needs)</span></div>
                     </div>
                 </div>
-                <p class="text-stone-700 mt-2">By implementing these energy solutions (Solar PV + BESS + Efficient Machinery + Potential Bioenergy), the pistachio milk factory can achieve greater operational autonomy, reduce its environmental impact, stabilize energy costs, and truly embody the "eco-friendly" vision.</p>
+                <p class="text-stone-700 mt-2 text-sm">This strategy aims for energy resilience by combining on-site solar power generation with battery storage to ensure a consistent power supply for processing. Further sustainability can be achieved by using pistachio shell residues for bioenergy (e.g., heating water for cleaning or roasting processes) and by investing in energy-efficient equipment. This minimizes reliance on the unstable grid and fossil fuels, reduces operational costs in the long run, and enhances the factory's green credentials.</p>
 
 
                 <h4 class="text-lg font-semibold text-emerald-700 mt-6 mb-2">Improved Production & Valorization Flow:</h4>
@@ -479,6 +522,88 @@
                     </div>
                 </div>
                  <p class="text-xs text-gray-600 mt-1 text-center">This flow demonstrates a circular approach, maximizing resource use.</p>
+
+                <h4 class="text-lg font-semibold text-emerald-700 mt-6 mb-3">Visualizing the Pistachio Milk Eco-Factory: A Cradle-to-Cradle Cycle</h4>
+                <p class="text-stone-700 mb-4">This pistachio milk factory is envisioned to operate on cradle-to-cradle principles, creating a closed-loop system that minimizes waste and maximizes resource utilization, all powered by sustainable energy.</p>
+                <div class="c2c-diagram-container">
+                    <div class="text-center mb-4">
+                        <div class="power-illustration-item inline-flex mx-2"><span class="power-illustration-icon text-2xl">☀️</span><span class="text-sm">Solar PV</span></div>
+                        <span class="text-2xl font-bold text-gray-500 mx-1">+</span>
+                        <div class="power-illustration-item inline-flex mx-2"><span class="power-illustration-icon text-2xl">🔋</span><span class="text-sm">Battery Storage</span></div>
+                        <div class="text-sm text-gray-700 mt-1">Primary Energy Source for Factory Operations</div>
+                    </div>
+
+                    <div class="c2c-row-flex">
+                        <div class="c2c-stage">
+                            <div class="c2c-stage-icon">🌳</div>
+                            <div class="c2c-stage-title">1. Sustainable Pistachio Sourcing</div>
+                            <div class="c2c-stage-text">Locally grown pistachios (water-efficient farming). INPUT: Sunlight, Water (minimized).</div>
+                        </div>
+                        <div class="c2c-arrow-lg">➡️</div>
+                         <div class="c2c-stage">
+                            <div class="c2c-stage-icon">💧</div>
+                            <div class="c2c-stage-title">Water Input & Recycling</div>
+                            <div class="c2c-stage-text">Fresh water for processing, with internal loops for reusing treated process water for cleaning / non-critical applications.</div>
+                        </div>
+                    </div>
+
+                    <div class="c2c-arrow-lg transform rotate-90 my-2 mx-auto w-fit">⬇️</div>
+
+                    <div class="c2c-row-flex bg-emerald-50 p-2 rounded-lg">
+                        <div class="c2c-stage flex-grow-[2]">
+                            <div class="c2c-stage-icon">🏭</div>
+                            <div class="c2c-stage-title">2. Eco-Efficient Factory Processing</div>
+                            <div class="flow-container text-xs my-1">
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">🛠️</span><span>Shelling</span></div>
+                                <div class="flow-arrow !text-lg">➡️</div>
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">🔥</span><span>Roasting</span></div>
+                                <div class="flow-arrow !text-lg">➡️</div>
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">⚙️</span><span>Grinding</span></div>
+                                <div class="flow-arrow !text-lg">➡️</div>
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">💧</span><span>Blending</span></div>
+                                <div class="flow-arrow !text-lg">➡️</div>
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">♨️</span><span>Pasteurizing</span></div>
+                                <div class="flow-arrow !text-lg">➡️</div>
+                                <div class="flow-step !min-w-[80px] !p-2"><span class="flow-step-icon !text-lg">📦</span><span>Packaging</span></div>
+                            </div>
+                            <div class="c2c-stage-text mt-1">Energy from Solar+Storage. Minimized water use.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center my-2">
+                        <div class="flex justify-center md:col-start-2"><div class="c2c-arrow-lg transform rotate-90">⬇️</div></div>
+                    </div>
+
+                    <div class="c2c-row-flex">
+                        <div class="c2c-stage">
+                            <div class="c2c-stage-icon">🥛</div>
+                            <div class="c2c-stage-title">3. Product: Pistachio Milk</div>
+                            <div class="c2c-stage-text">Distributed in recyclable/ sustainable packaging.</div>
+                            <div class="c2c-input-output mt-2">➡️ Market & Consumers</div>
+                        </div>
+                        <div class="c2c-arrow-lg hidden md:block">🔄</div>
+                        <div class="c2c-stage">
+                            <div class="c2c-stage-icon">🌿</div>
+                            <div class="c2c-stage-title">4. By-Product: Shells Valorized</div>
+                            <div class="c2c-stage-text">Shells collected. Processed (e.g., Pyrolysis ⚗️) into:</div>
+                            <div class="c2c-input-output mt-2">Biochar (Soil Amendment 🌱), Active Compounds ✨, Bioenergy (Thermal) 🔥</div>
+                        </div>
+                    </div>
+                     <div class="c2c-row-flex justify-around items-center my-4">
+                        <div class="c2c-stage">
+                             <div class="c2c-stage-icon">💧♻️</div>
+                             <div class="c2c-stage-title">5. Wastewater Treatment</div>
+                             <div class="c2c-stage-text">On-site biological treatment. Recycled water for cleaning, irrigation (if safe), or safe discharge. Sludge to compost.</div>
+                         </div>
+                           <div class="c2c-arrow-lg transform rotate-180 hidden md:block">⬅️</div>
+                         <div class="c2c-stage">
+                             <div class="c2c-stage-icon">♻️📦</div>
+                             <div class="c2c-stage-title">6. Packaging End-of-Life</div>
+                             <div class="c2c-stage-text">Promote collection & recycling of packaging materials (consumer end). Aim for circular packaging solutions.</div>
+                         </div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-4 text-center">This conceptual model emphasizes a closed-loop system powered by renewables, where pistachio processing minimizes environmental footprint and maximizes resource efficiency by transforming by-products (shells, wastewater) into valuable resources.</p>
+                </div>
                 
                 <h3 class="text-xl font-semibold mt-8 mb-3">Illustrative Cost Considerations (Highly Variable in Syrian Context)</h3>
                 <p class="text-stone-700 mb-2">The following are typical cost components. Actual figures require detailed on-the-ground feasibility studies in Syria due to extreme volatility and specific local conditions.</p>
@@ -685,62 +810,6 @@
                 </div>
                 <p class="text-xs text-gray-600 mt-2 text-center">Values are approximate and for unsweetened versions of plant milks unless specified. Fortification levels vary widely. %DV = Percent Daily Value.</p>
 
-                 <h3 class="text-xl font-semibold mt-6 mb-3">Visualizing the Ideal Pistachio Milk Eco-Factory: A Cradle-to-Cradle Cycle</h3>
-                <p class="text-stone-700 mb-4">The ideal pistachio milk factory operates on cradle-to-cradle principles, ensuring sustainability at every stage. This diagram illustrates the conceptual flow:</p>
-                <div class="c2c-diagram-container">
-                    <div class="c2c-row-flex">
-                        <div class="c2c-stage">
-                            <div class="c2c-stage-icon">🌳</div>
-                            <div class="c2c-stage-title">1. Sustainable Pistachio Sourcing</div>
-                            <div class="c2c-stage-text">Locally sourced Syrian pistachios, promoting water-efficient farming.</div>
-                        </div>
-                        <div class="c2c-arrow-lg">➡️</div>
-                        <div class="c2c-stage">
-                            <div class="c2c-stage-icon">🏭</div>
-                            <div class="c2c-stage-title">2. Eco-Efficient Processing</div>
-                            <div class="c2c-stage-text">Shelling ⚙️, Roasting (optional) 🔥, Grinding 🌀, Blending 💧, Pasteurizing ♨️, Packaging 📦. Minimized energy/water use.</div>
-                        </div>
-                    </div>
-                    <div class="c2c-row-flex justify-around items-center my-4">
-                        <div class="c2c-input-output"><span class="power-solution-icon">☀️</span> Renewable Energy (Solar + Storage)</div>
-                        <div class="c2c-arrow-lg transform rotate-90">⬇️</div>
-                        <div class="c2c-input-output"><span class="power-solution-icon">💧</span> Water Recycling & Conservation</div>
-                    </div>
-                     <div class="c2c-row-flex">
-                        <div class="c2c-stage">
-                            <div class="c2c-stage-icon">🥛</div>
-                            <div class="c2c-stage-title">3. Pistachio Milk Product</div>
-                            <div class="c2c-stage-text">Nutritious, premium plant-based milk in sustainable packaging.</div>
-                        </div>
-                        <div class="c2c-arrow-lg">➡️</div>
-                        <div class="c2c-stage">
-                            <div class="c2c-stage-icon">🌍</div>
-                            <div class="c2c-stage-title">4. Distribution & Consumer Use</div>
-                            <div class="c2c-stage-text">Efficient logistics, promoting conscious consumption.</div>
-                        </div>
-                    </div>
-                     <div class="c2c-row-flex justify-around items-center my-4">
-                        <div class="c2c-input-output"><span class="power-solution-icon">♻️</span> Packaging Recycling (Consumer end)</div>
-                        <div class="c2c-arrow-lg transform -rotate-90">⬆️</div>
-                        <div class="c2c-input-output"><span class="power-solution-icon">💨</span> Minimized Emissions</div>
-                    </div>
-                     <div class="c2c-row-flex">
-                        <div class="c2c-stage">
-                            <div class="c2c-stage-icon">🌿</div>
-                            <div class="c2c-stage-title">5. Shell Valorization</div>
-                            <div class="c2c-stage-text">Pistachio shells ♻️ to Biochar 🌱 & Active Compounds ✨.</div>
-                        </div>
-                        <div class="c2c-arrow-lg transform rotate-180">⬅️</div>
-                         <div class="c2c-stage">
-                            <div class="c2c-stage-icon">💧</div>
-                            <div class="c2c-stage-title">6. Wastewater Treatment</div>
-                            <div class="c2c-stage-text">On-site treatment for reuse in non-critical applications or safe discharge.</div>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-600 mt-4 text-center">This model emphasizes a closed-loop system, transforming by-products into valuable resources and minimizing environmental impact, powered by renewable energy.</p>
-                </div>
-
-
                 <h3 class="text-xl font-semibold mt-6 mb-3">Sandbox Potential & Strategic Fit</h3>
                 <p class="text-stone-700">Establishing a model pistachio milk production facility in Syria, integrated with shell valorization, aligns perfectly with the "sandbox" concept. It would demonstrate high-value addition, showcase circular economy principles, create skilled jobs, and potentially attract investment. By focusing on premium quality and unique Syrian origin, pistachio milk can become a flagship product for Syria's eco-friendly industrial sector.</p>
             </section>
@@ -750,7 +819,7 @@
             <section class="mb-8 p-6 bg-white rounded-lg shadow">
                 <h2 class="text-2xl font-semibold mb-4">The Eco-Industrial Park (EIP) Vision</h2>
                 <p class="section-intro">The "sandbox" factory concept is the cornerstone of a larger vision: an Eco-Industrial Park (EIP) in Syria. This EIP would be a collaborative community of businesses working together for enhanced environmental, economic, and social performance. This section explores EIP core principles, lessons from global models, and a phased development approach for Syria, positioning the initial factory as a catalyst for sustainable industrial regeneration.</p>
-                
+                               
                 <h3 class="text-xl font-semibold mt-8 mb-3">Core EIP Principles</h3>
                 <div id="eipPrinciplesContainer" class="space-y-3 mb-6">
                 </div>
@@ -767,6 +836,96 @@
                 <div id="globalEipModelsContainer" class="space-y-3">
                 </div>
                 <p class="text-sm text-gray-600 mt-2">Insights from successful international EIPs can inform Syria's approach. Click each model for key takeaways.</p>
+            </section>
+        </div>
+        
+        <div id="future-horizons" class="tab-content hidden">
+            <section class="mb-8 p-6 bg-white rounded-lg shadow">
+                <h2 class="text-2xl font-semibold mb-4">🚀 Future Industrial Horizons: Electronics & Consumer Products</h2>
+                <p class="section-intro">Looking beyond immediate resource-based industries, Syria can strategically plan for a future that includes higher-technology manufacturing sectors like electronics and consumer products. This path, while challenging, offers significant long-term benefits in terms of economic diversification, job creation for a skilled workforce, and integration into global value chains. An aggressive, phased approach, supported by targeted policies and partnerships, could make this a reality within a 5-10 year planning horizon for initial stages, contingent on rapid foundational improvements.</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3">The Vision: A Syrian Tech Manufacturing Hub</h3>
+                <p class="text-stone-700 mb-4">The goal is to develop a competitive electronics and consumer product manufacturing ecosystem, mirroring the successful paths of countries like Vietnam or the Philippines, by starting with accessible entry points and progressively building complexity and local value addition.</p>
+
+                <h4 class="text-lg font-semibold text-emerald-700 mb-2">Phased Development Model:</h4>
+                <div class="space-y-4">
+                    <div class="future-item">
+                        <h5 class="future-item-title"><span class="future-item-icon">📦</span>Phase 1: Final Assembly, Test & Pack (FATP) - (Target: Years 1-3 of focused effort)</h5>
+                        <p class="text-sm text-stone-600">Focus on assembling imported components (SKD/CKD kits) for consumer electronics (e.g., mobile phone accessories, small home appliances, LED lighting) and other consumer goods. This phase is labor-intensive, creates immediate jobs, and builds basic manufacturing discipline. <span class="tech-highlight">🤖 Basic robotics for repetitive tasks.</span></p>
+                    </div>
+                    <div class="future-item">
+                        <h5 class="future-item-title"><span class="future-item-icon">🔩</span>Phase 2: Component & Parts Manufacturing - (Target: Years 3-6)</h5>
+                        <p class="text-sm text-stone-600">Gradually integrate local manufacturing of less complex components: plastic injection molding for casings, metal stamping for parts, basic cable assemblies, packaging materials. Introduce 3D printing for prototyping and small-batch custom parts. <span class="tech-highlight">🤖 Industrial robots for molding/stamping.</span></p>
+                    </div>
+                    <div class="future-item">
+                        <h5 class="future-item-title"><span class="future-item-icon">💡</span>Phase 3: Advanced Manufacturing & SMT - (Target: Years 5-8)</h5>
+                        <p class="text-sm text-stone-600">Develop capabilities in Surface Mount Technology (SMT) for Printed Circuit Board Assembly (PCBA). This requires higher capital investment and more skilled technicians but significantly increases local value add. Attract specialized suppliers. <span class="tech-highlight">🤖 High-precision SMT robotics. 🧠 AI for PCBA QC.</span></p>
+                    </div>
+                     <div class="future-item">
+                        <h5 class="future-item-title"><span class="future-item-icon">🔬</span>Phase 4: Product Design, R&D, and Niche Specialization - (Target: Years 7-10+)</h5>
+                        <p class="text-sm text-stone-600">Foster local product design and R&D capabilities. Focus on niche markets or customized products. Develop a stronger ecosystem of local suppliers and specialized services. Aim for original design manufacturing (ODM) capabilities. <span class="tech-highlight">🧠 AI in generative design & R&D.</span></p>
+                    </div>
+                </div>
+                
+                <h4 class="text-lg font-semibold text-emerald-700 mt-6 mb-2">The Smart Factory Imperative: Robotics & AI</h4>
+                <p class="text-stone-700 mb-4">Achieving competitiveness in modern electronics manufacturing necessitates embracing smart factory principles. Robotics and Artificial Intelligence (AI) are key enablers:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-200">
+                        <h5 class="font-semibold text-sky-700 mb-1 flex items-center"><span class="future-item-icon text-sky-600">🤖</span>Robotics Integration:</h5>
+                        <p class="text-sm text-sky-800">From collaborative robots (cobots) in initial FATP stages for assembly and material handling, to advanced industrial robots for precision tasks in component manufacturing (molding, CNC) and SMT lines, robotics enhance speed, consistency, quality, and worker safety.</p>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+                         <h5 class="font-semibold text-indigo-700 mb-1 flex items-center"><span class="future-item-icon text-indigo-600">🧠</span>AI Enablement:</h5>
+                        <p class="text-sm text-indigo-800">AI algorithms can optimize production schedules, predict machinery maintenance needs (reducing downtime), perform sophisticated visual quality control, manage complex supply chains for components, analyze data for yield improvement, and even assist in innovative product design.</p>
+                    </div>
+                </div>
+                 <p class="text-stone-700 mt-4">Successful adoption requires not just technology acquisition but also a focus on data infrastructure, cybersecurity, and continuous upskilling of the workforce to manage and work alongside these advanced systems.</p>
+
+
+                <h3 class="text-xl font-semibold mt-8 mb-3">Potential Benefits for Syria:</h3>
+                <ul class="list-disc list-inside text-stone-700 space-y-2 mb-6">
+                    <li><strong>Mass Job Creation:</strong> Significant employment opportunities across various skill levels.</li>
+                    <li><strong>Skills & Technology Upgradation:</strong> Transfer of modern manufacturing technologies and development of a highly skilled technical workforce.</li>
+                    <li><strong>Economic Diversification:</strong> Reducing reliance on primary sectors and creating higher-value industries.</li>
+                    <li><strong>Increased Exports & Foreign Exchange:</strong> Potential to serve regional and international markets.</li>
+                    <li><strong>Stimulus for Support Industries:</strong> Growth in logistics, packaging, maintenance, and other ancillary services.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3">Critical Pre-conditions & Challenges to Address Aggressively:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h5 class="font-semibold text-red-700 mb-2">Foundational Infrastructure:</h5>
+                        <ul class="list-disc list-inside text-sm text-red-800 space-y-1">
+                            <li><strong>Stable & High-Quality Power:</strong> Absolutely critical. Requires massive investment in reliable generation (including large-scale renewables + storage) and grid modernization.</li>
+                            <li><strong>Efficient Logistics:</strong> Modernized ports, roads, rail, and streamlined customs for timely import of components and export of goods.</li>
+                            <li><strong>Robust Digital Infrastructure:</strong> High-speed, reliable internet connectivity for smart factory operations.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h5 class="font-semibold text-yellow-700 mb-2">Human Capital & Supply Chain:</h5>
+                        <ul class="list-disc list-inside text-sm text-yellow-800 space-y-1">
+                            <li><strong>Skilled Workforce:</strong> Intensive technical and vocational training (TVET) programs for electronics assembly, SMT, robotics operation/maintenance, AI application, quality control, engineering, and supply chain management.</li>
+                            <li><strong>Component Supply Chain Access:</strong> Strategies to ensure reliable and cost-effective access to a global network of electronic component suppliers, potentially through special economic zones or trade agreements.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-200">
+                        <h5 class="font-semibold text-sky-700 mb-2">Investment & Policy Environment:</h5>
+                         <ul class="list-disc list-inside text-sm text-sky-800 space-y-1">
+                            <li><strong>Significant FDI & Partnerships:</strong> Proactive measures to attract foreign investment and form strategic partnerships with experienced international manufacturers (e.g., from China, Taiwan, Vietnam, Gulf).</li>
+                            <li><strong>Supportive Regulatory Framework:</strong> Clear, stable laws for investment, IP protection, quality standards, labor, and export promotion. Reduced bureaucracy.</li>
+                             <li><strong>National Strategic Focus:</strong> A dedicated national strategy with clear targets, incentives, and coordination across government agencies.</li>
+                        </ul>
+                    </div>
+                     <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                        <h5 class="font-semibold text-purple-700 mb-2">Market & Competitiveness:</h5>
+                         <ul class="list-disc list-inside text-sm text-purple-800 space-y-1">
+                            <li><strong>Quality Assurance Systems:</strong> Establishing robust QA/QC systems to meet international standards from day one.</li>
+                            <li><strong>Competitive Niche:</strong> Identifying specific product categories or market segments where Syria could develop a competitive edge.</li>
+                             <li><strong>Security & Stability:</strong> Ensuring a secure and stable operating environment for businesses and investors.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <p class="text-stone-700 mt-6">While the path is demanding, a focused, aggressive, and strategically phased approach to developing an electronics and consumer products sector could be a transformative long-term goal for Syria's industrial future, building upon the successes of initial eco-friendly industries.</p>
             </section>
         </div>
 
@@ -804,7 +963,8 @@
         const tabContents = document.querySelectorAll('.tab-content');
         const opportunitiesContainer = document.getElementById('opportunitiesContainer');
         const industryFilterButtons = document.querySelectorAll('.industry-filter-button');
-        const modal = document.getElementById('opportunityModal');
+        
+        const opportunityInfoModal = document.getElementById('opportunityModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalEcoDimensions = document.getElementById('modalEcoDimensions');
         const modalMarketPotential = document.getElementById('modalMarketPotential');
@@ -812,6 +972,47 @@
         const modalSandboxPotential = document.getElementById('modalSandboxPotential');
         const modalChallenges = document.getElementById('modalChallenges');
         const modalReportSource = document.getElementById('modalReportSource');
+
+        const passwordPromptModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordError = document.getElementById('passwordError');
+        const submitPasswordButton = document.getElementById('submitPassword');
+        const cancelPasswordButton = document.getElementById('cancelPassword');
+        
+        let currentPendingTab = null; 
+
+        let unlockedTabs = {}; 
+        let currentActiveTabId = 'reality'; 
+        const PROTECTED_TABS = ['olive-oil', 'pistachio-milk'];
+        const PASSWORD = "divedeep";
+
+        function showTab(tabId) {
+          tabButtons.forEach(btn => {
+            if (btn.dataset.tab === tabId) {
+              btn.classList.add('tab-active');
+              btn.classList.remove('tab-inactive');
+            } else {
+              btn.classList.remove('tab-active');
+              btn.classList.add('tab-inactive');
+            }
+          });
+
+          tabContents.forEach(content => {
+            if (content.id === tabId) {
+              content.classList.remove('hidden');
+            } else {
+              content.classList.add('hidden');
+            }
+          });
+          currentActiveTabId = tabId;
+          
+            if (tabId === 'industries' && typeof renderOpportunities === 'function') {
+                const activeFilterButton = document.querySelector('.industry-filter-button.bg-emerald-500, .industry-filter-button.bg-blue-500');
+                const currentFilter = activeFilterButton ? activeFilterButton.dataset.filter : 'all';
+                renderOpportunities(currentFilter);
+            }
+        }
+
 
         const criteriaData = [
             { title: "♻️ Environmental Stewardship & Circularity", details: "Prioritizes circular economy, low carbon footprint, water/energy efficiency, waste valorization, sustainable sourcing, and biodiversity protection. Essential for Syria's resource scarcity and global standards." },
@@ -865,7 +1066,8 @@
                     "Energy: Invest in renewable generation (solar, biomass), improve grid. Guided by Renewable Energy Master Plan.",
                     "Water: Water-efficient irrigation, industrial water treatment/recycling, rainwater harvesting.",
                     "Logistics: Rehabilitate transport routes (roads, rail) to connect industrial sites, ports.",
-                    "Waste Management: Establish efficient collection, segregation, sorting, pre-processing facilities."
+                    "Waste Management: Establish efficient collection, segregation, sorting, pre-processing facilities.",
+                    "Digital Infrastructure: Enhance high-speed internet and data capabilities crucial for smart factories and IoT/AI integration."
                 ]
             },
             {
@@ -883,14 +1085,15 @@
                 points: [
                     "Collaboration with TVET Institutions: Develop curricula for green industry needs (RE techs, circular economy ops).",
                     "On-the-Job Training: Use flagship factory as a practical training hub, offer apprenticeships.",
-                    "Focus on Youth and Women: Prioritize their inclusion and training in emerging green sectors."
+                    "Focus on Youth and Women: Prioritize their inclusion and training in emerging green sectors.",
+                    "Smart Manufacturing Skills: Develop programs for robotics operation/maintenance, AI application, data analysis, and IoT systems management for future industries."
                 ]
             },
             {
                 category: "🌐 Leveraging Free Zones and International Partnerships",
                 points: [
                     "Utilize Existing Free Zones: Assess Adra and Hassia free zones for suitability (land, utilities, regulatory framework).",
-                    "Strategic International Partnerships: Seek tech transfer, market access, co-investment, expertise.",
+                    "Strategic International Partnerships: Seek tech transfer, market access, co-investment, expertise, especially for advanced manufacturing.",
                     "Build on Governmental MoUs: Leverage agreements (e.g., with China for free zones, UNDP/Norway for RE master plan)."
                 ]
             },
@@ -1020,6 +1223,19 @@
                 sandboxPotential: "Assembly facility using imported PV cells, gradually localizing components (frames, mounting). Integrated vocational training. Panels could power EIP.",
                 challenges: "Sourcing PV cells and critical components, quality control, technical skills development, competition from fully imported panels.",
                 reportSource: "Based on Report Sections IV.C.1, Table 3."
+            },
+            { 
+                id: "electronics-hub", 
+                name: "🚀 Future Hub: Electronics & Consumer Goods Manufacturing", 
+                sector: "future", 
+                icon: "💡",
+                description: "Long-term vision for a phased development of an electronics and consumer goods manufacturing hub, starting with FATP and progressing to advanced manufacturing.",
+                ecoDimensions: "Potential for smart, energy-efficient manufacturing. High initial energy demand. Focus on e-waste management in later phases.",
+                marketPotential: "Significant regional and domestic demand for consumer electronics and goods. High job creation potential.",
+                syrianAdvantage: "(Long-term) Development of a skilled technical workforce, economic diversification, integration into global tech value chains.",
+                sandboxPotential: "Each phase (FATP, component mfg, SMT, R&D) acts as a sandbox for the next, building capacity incrementally.",
+                challenges: "Massive infrastructure needs (stable power, logistics, digital), skilled labor development, access to global component supply chains, significant capital investment, establishing quality control and international standards, intense global competition.",
+                reportSource: "Conceptualized as a long-term strategic direction for Syria's industrial future."
             }
         ];
         
@@ -1094,23 +1310,107 @@
             const opportunity = opportunitiesData.find(op => op.id === opportunityId);
             if (opportunity) {
                 modalTitle.textContent = opportunity.name;
-                modalEcoDimensions.innerHTML = `<h4 class="font-semibold text-emerald-600">🌍 Eco-Friendly Dimensions:</h4><p class="text-sm text-stone-700">${opportunity.ecoDimensions}</p>`;
-                modalMarketPotential.innerHTML = `<h4 class="font-semibold text-emerald-600">📈 Market Potential:</h4><p class="text-sm text-stone-700">${opportunity.marketPotential}</p>`;
-                modalSyrianAdvantage.innerHTML = `<h4 class="font-semibold text-emerald-600">🇸🇾 Syrian Advantage:</h4><p class="text-sm text-stone-700">${opportunity.syrianAdvantage}</p>`;
-                modalSandboxPotential.innerHTML = `<h4 class="font-semibold text-emerald-600">💡 Sandbox Potential:</h4><p class="text-sm text-stone-700">${opportunity.sandboxPotential}</p>`;
-                modalChallenges.innerHTML = `<h4 class="font-semibold text-red-600">⚠️ Key Challenges:</h4><p class="text-sm text-stone-700">${opportunity.challenges}</p>`;
+                
+                if (opportunity.sector === 'future') {
+                    modalEcoDimensions.innerHTML = `<h4 class="modal-section-title">Phased Development Model:</h4>
+                        <ul class="list-disc list-inside text-sm text-stone-700 space-y-1">
+                        <li><strong>Phase 1 (Target: Years 1-3): Final Assembly, Test & Pack (FATP)</strong> - Assemble imported SKD/CKD kits for consumer electronics (accessories, small appliances, LED lighting). Focus: Job creation, basic manufacturing discipline. <span class="tech-highlight">🤖 Basic robotics.</span></li>
+                        <li><strong>Phase 2 (Target: Years 3-6): Component & Parts Manufacturing</strong> - Localize production of plastic casings, metal parts, cable assemblies. Introduce 3D printing for prototypes. <span class="tech-highlight">🤖 Industrial robots.</span></li>
+                        <li><strong>Phase 3 (Target: Years 5-8): Advanced Manufacturing & SMT</strong> - Develop Surface Mount Technology (SMT) for Printed Circuit Board Assembly (PCBA). <span class="tech-highlight">🤖 SMT robotics, 🧠 AI for QC.</span></li>
+                        <li><strong>Phase 4 (Target: Years 7-10+): Product Design, R&D, Niche Specialization</strong> - Foster local design, R&D. Aim for Original Design Manufacturing (ODM). <span class="tech-highlight">🧠 AI in design.</span></li>
+                        </ul>`;
+                    modalMarketPotential.innerHTML = `<h4 class="modal-section-title">The Smart Factory Imperative: Robotics & AI</h4>
+                        <p class="text-sm text-stone-700 mb-1">Competitiveness requires smart factory principles:</p>
+                        <ul class="list-disc list-inside text-sm text-stone-700 space-y-1">
+                        <li><strong>Robotics Integration:</strong> From cobots in FATP to advanced robots for precision tasks in SMT, enhancing speed, consistency, and safety.</li>
+                        <li><strong>AI Enablement:</strong> Optimizing production, predictive maintenance, visual QC, supply chain management, yield improvement, and innovative design.</li>
+                        <li><strong>Needs:</strong> Data infrastructure, cybersecurity, continuous upskilling.</li>
+                        </ul>`;
+                    modalSyrianAdvantage.innerHTML = `<h4 class="modal-section-title">Potential Benefits for Syria:</h4>
+                        <ul class="list-disc list-inside text-sm text-stone-700 space-y-1">
+                        <li>Mass job creation.</li>
+                        <li>Skills & technology upgradation.</li>
+                        <li>Economic diversification.</li>
+                        <li>Increased exports & foreign exchange.</li>
+                        <li>Stimulus for support industries.</li>
+                        </ul>`;
+                    modalSandboxPotential.innerHTML = ``; // Clear this if not directly applicable or rephrase
+                    modalChallenges.innerHTML = `<h4 class="modal-section-title text-red-700">Critical Pre-conditions & Challenges:</h4>
+                        <ul class="list-disc list-inside text-sm text-red-700 space-y-1">
+                        <li><strong>Infrastructure:</strong> Stable & high-quality power, efficient logistics, robust digital connectivity.</li>
+                        <li><strong>Human Capital:</strong> Intensive TVET for electronics, robotics, AI, SMT.</li>
+                        <li><strong>Supply Chain:</strong> Reliable access to global electronic components.</li>
+                        <li><strong>Investment & Policy:</strong> Significant FDI, strong international partnerships, supportive & stable regulatory framework, national strategy.</li>
+                        <li><strong>Market & Quality:</strong> Robust QA/QC systems, identifying competitive niches, security & stability.</li>
+                        </ul>`;
+
+                } else {
+                    modalEcoDimensions.innerHTML = `<h4 class="modal-section-title">🌍 Eco-Friendly Dimensions:</h4><p class="text-sm text-stone-700">${opportunity.ecoDimensions}</p>`;
+                    modalMarketPotential.innerHTML = `<h4 class="modal-section-title">📈 Market Potential:</h4><p class="text-sm text-stone-700">${opportunity.marketPotential}</p>`;
+                    modalSyrianAdvantage.innerHTML = `<h4 class="modal-section-title">🇸🇾 Syrian Advantage:</h4><p class="text-sm text-stone-700">${opportunity.syrianAdvantage}</p>`;
+                    modalSandboxPotential.innerHTML = `<h4 class="modal-section-title">💡 Sandbox Potential:</h4><p class="text-sm text-stone-700">${opportunity.sandboxPotential}</p>`;
+                    modalChallenges.innerHTML = `<h4 class="modal-section-title text-red-600">⚠️ Key Challenges:</h4><p class="text-sm text-stone-700">${opportunity.challenges}</p>`;
+                }
                 modalReportSource.textContent = opportunity.reportSource;
-                modal.style.display = "block";
+                opportunityInfoModal.style.display = "block";
             }
         }
 
         function closeModal() {
-            modal.style.display = "none";
+            if(opportunityInfoModal) opportunityInfoModal.style.display = "none";
+        }
+        
+        function closePasswordModalOnly() { 
+            if(passwordPromptModal) passwordPromptModal.style.display = "none";
+            if(passwordInput) passwordInput.value = '';
+            if(passwordError) passwordError.style.display = 'none';
         }
 
+        if(submitPasswordButton) {
+            submitPasswordButton.addEventListener('click', () => {
+                if (passwordInput.value === PASSWORD) {
+                    unlockedTabs[currentPendingTab] = true;
+                    closePasswordModalOnly(); 
+                    showTab(currentPendingTab); 
+                    currentPendingTab = null; 
+                } else {
+                    if(passwordError) passwordError.style.display = 'block';
+                    if(passwordInput) passwordInput.value = '';
+                }
+            });
+        }
+        
+        if(passwordInput){
+            passwordInput.addEventListener('keypress', function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+                    submitPasswordButton.click(); 
+                }
+            });
+        }
+
+
+        if(cancelPasswordButton) {
+            cancelPasswordButton.addEventListener('click', () => {
+                closePasswordModalOnly(); 
+                if (currentPendingTab) { 
+                    showTab(currentActiveTabId); 
+                    currentPendingTab = null; 
+                }
+            });
+        }
+
+
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target == opportunityInfoModal) {
                 closeModal();
+            }
+            if (event.target == passwordPromptModal) { 
+                closePasswordModalOnly(); 
+                if (currentPendingTab) { 
+                    showTab(currentActiveTabId); 
+                    currentPendingTab = null; 
+                }
             }
         }
         
@@ -1120,14 +1420,18 @@
             const filteredOpportunities = filter === 'all' ? opportunitiesData : opportunitiesData.filter(op => op.sector === filter);
             
             filteredOpportunities.forEach(op => {
+                const isFutureCard = op.sector === 'future';
+                const cardClasses = `bg-white p-5 rounded-lg shadow-lg card-hover transition-all duration-300 flex flex-col justify-between relative ${isFutureCard ? 'future-card' : ''}`;
+
                 const card = `
-                    <div class="bg-white p-5 rounded-lg shadow-lg card-hover transition-all duration-300 flex flex-col justify-between">
+                    <div class="${cardClasses}">
+                        ${isFutureCard ? '<span class="future-card-badge">Future Vision</span>' : ''}
                         <div>
                             <div class="text-4xl mb-2">${op.icon}</div>
-                            <h3 class="text-lg font-semibold text-emerald-700 mb-2">${op.name}</h3>
+                            <h3 class="text-lg font-semibold ${isFutureCard ? 'text-blue-700' : 'text-emerald-700'} mb-2">${op.name}</h3>
                             <p class="text-sm text-stone-600 mb-3">${op.description}</p>
                         </div>
-                        <button onclick="openModal('${op.id}')" class="mt-auto bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-2 rounded-md transition-colors duration-150 w-full">Learn More</button>
+                        <button onclick="openModal('${op.id}')" class="mt-auto ${isFutureCard ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'} text-white text-sm px-4 py-2 rounded-md transition-colors duration-150 w-full">Learn More</button>
                     </div>
                 `;
                 opportunitiesContainer.innerHTML += card;
@@ -1136,22 +1440,20 @@
 
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const targetTab = button.dataset.tab;
+                const targetTabId = button.dataset.tab; 
 
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('tab-active');
-                    btn.classList.add('tab-inactive');
-                });
-                button.classList.add('tab-active');
-                button.classList.remove('tab-inactive');
-
-                tabContents.forEach(content => {
-                    if (content.id === targetTab) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
+                if (PROTECTED_TABS.includes(targetTabId)) {
+                    if (!unlockedTabs[targetTabId]) {
+                        currentPendingTab = targetTabId;
+                        if(passwordPromptModal) passwordPromptModal.style.display = 'block';
+                        if(passwordInput) passwordInput.focus();
+                        if(passwordError) passwordError.style.display = 'none';
+                    } else { 
+                        showTab(targetTabId);
                     }
-                });
+                } else { 
+                    showTab(targetTabId);
+                }
             });
         });
         
@@ -1161,10 +1463,14 @@
                     const filter = button.dataset.filter;
                     renderOpportunities(filter);
                     industryFilterButtons.forEach(btn => {
-                        btn.classList.remove('bg-emerald-500', 'text-white');
+                        btn.classList.remove('bg-emerald-500', 'text-white', 'bg-blue-500'); // Remove blue too
                         btn.classList.add('bg-gray-200', 'text-gray-700');
                     });
-                    button.classList.add('bg-emerald-500', 'text-white');
+                    if (filter === 'future') {
+                         button.classList.add('bg-blue-500', 'text-white');
+                    } else {
+                        button.classList.add('bg-emerald-500', 'text-white');
+                    }
                     button.classList.remove('bg-gray-200', 'text-gray-700');
                 });
             });
@@ -1272,12 +1578,16 @@
             });
         }
         
-        populateCriteria();
-        populateAdvantages();
-        populateEipPrinciples();
-        populateGlobalEipModels();
-        populateRecommendations();
-        renderOpportunities(); 
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab(currentActiveTabId); // Show the default active tab
+            populateCriteria();
+            populateAdvantages();
+            populateEipPrinciples();
+            populateGlobalEipModels();
+            populateRecommendations();
+            renderOpportunities(); 
+        });
 
     </script>
 </body>
